@@ -84,7 +84,7 @@ type = custom/text
 content-margin = 1 
 content-foreground = #7f7
 content = %{T6}%{T-}
-click-left = firefox http://confluence.soops.intern/x/DwCQAQ &
+click-left = firefox http://github.com/linkuistics/devanyware &
 
 [module/exit]
 type = custom/text

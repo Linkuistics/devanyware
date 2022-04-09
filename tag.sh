@@ -2,8 +2,8 @@
 
 TAG=$1
 
-docker tag soops/devanyware/headless docker.soops.intern/soops/devanyware/headless:$TAG
-docker rmi soops/devanyware/headless:latest
+docker tag linkuistics/devanyware-headless linkuistics/devanyware-headless:$TAG
+docker rmi linkuistics/devanyware-headless:latest
 
-docker tag soops/devanyware/headfull docker.soops.intern/soops/devanyware/headfull:$TAG
-docker rmi soops/devanyware/headfull:latest
+docker tag linkuistics/devanyware-headfull linkuistics/devanyware-headfull:$TAG
+docker rmi linkuistics/devanyware-headfull:latest

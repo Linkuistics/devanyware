@@ -4,9 +4,6 @@
 
 FROM ubuntu:21.04
 
-# RUN echo 'Acquire::HTTP::Proxy "http://cache.apt.soops.intern";' >> /etc/apt/apt.conf.d/01proxy ; \
-#     echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01proxy
-
 ENV GLOBAL_CHECK_DATE=2022-03-18
 
 RUN set -eux ; \

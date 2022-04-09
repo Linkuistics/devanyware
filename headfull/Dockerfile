@@ -4,9 +4,6 @@
 
 FROM ubuntu:21.04 AS polybar
 
-# RUN echo 'Acquire::HTTP::Proxy "http://cache.apt.soops.intern";' >> /etc/apt/apt.conf.d/01proxy ; \
-#     echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01proxy
-
 ENV LC_ALL=C.UTF-8
 
 RUN set -eux ; \
@@ -41,7 +38,7 @@ RUN set -euxo pipefail ; \
 # base image
 #####################################################
 
-FROM soops/devanyware/headless
+FROM linkuistics/devanyware-headless
 
 COPY usr /usr
 COPY --chown=dev:dev home/dev /home/dev
