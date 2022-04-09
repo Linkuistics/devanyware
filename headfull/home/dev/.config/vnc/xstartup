@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+if [ -e "$HOME/.Xresources" ] ; then
+    xrdb "$HOME/.Xresources"
+fi
+
+for i in /home/dev/.config/vnc/*.xstartup ; do
+    source $i 
+done
