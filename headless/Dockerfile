@@ -62,15 +62,15 @@ RUN set -euxo pipefail ; \
     git config --global pull.rebase true ; \
     git lfs install
 
-# https://download.docker.com/linux/static/stable/x86_64/
+# https://download.docker.com/linux/static/stable/
 ENV DOCKER_VERSION=20.10.9
 RUN set -euxo pipefail ; \
-    curl --location --silent https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
+    curl --location --silent https://download.docker.com/linux/static/stable/$(arch)/docker-${DOCKER_VERSION}.tgz \
        | tar zx --strip-components=1 --directory=/usr/bin docker/docker --no-overwrite-dir
 
 # https://github.com/docker/compose/releases
 RUN set -euxo pipefail ; \
-    curl --location --silent https://github.com/docker/compose/releases/download/v2.3.4/docker-compose-linux-$(uname -m) \
+    curl --location --silent https://github.com/docker/compose/releases/download/v2.3.4/docker-compose-linux-$(arch) \
         > /usr/local/bin/docker-compose ; \
     chmod +x /usr/local/bin/docker-compose
 

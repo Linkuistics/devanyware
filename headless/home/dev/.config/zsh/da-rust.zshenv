@@ -12,6 +12,7 @@ da/install-rust () {
     export path=($CARGO_HOME/bin $path)
 
     curl https://sh.rustup.rs -sSf | sh -s -- -y
+    rustup target add aarch64-unknown-linux-gnu
     rustup target add x86_64-unknown-linux-gnu
     rustup component add rust-analysis rust-src rustfmt clippy
 
