@@ -26,23 +26,28 @@ da/install-rust () {
 da/install-rust-macos () {
     set -euxo pipefail
 
-    [[ -a ~/.config/zsh/rust-macos.zshrc ]] && return
+    [[ -a ~/.config/zsh/rust-macos.zshenv ]] && return
 
     da/install-c-macos
     da/install-rust
 
+    rustup target add aarch64-apple-darwin
     rustup target add x86_64-apple-darwin
 
     (
-        echo 'export CARGO_TARGET_X86_64_APPLE_DARWIN_LINKER=${OSXCROSS_PREFIX}-clang'
-        echo 'export CARGO_TARGET_X86_64_APPLE_DARWIN_AR=${OSXCROSS_PREFIX}-ar'
-    ) > ~/.config/zsh/rust-macos.zshrc
+        echo 'export CARGO_TARGET_AARCH64_APPLE_DARWIN_AR=${AARCH64_OSXCROSS_PREFIX}-ar'
+        echo 'export CARGO_TARGET_AARCH64_APPLE_DARWIN_LINKER=${AARCH64_OSXCROSS_PREFIX}-clang'
+        echo 'export CARGO_TARGET_X86_64_APPLE_DARWIN_AR=${X86_64_OSXCROSS_PREFIX}-ar'
+        echo 'export CARGO_TARGET_X86_64_APPLE_DARWIN_LINKER=${X86_64_OSXCROSS_PREFIX}-clang'
+    ) > ~/.config/zsh/rust-macos.zshenv
+
+    source ~/.config/zsh/rust-macos.zshenv
 }
 
 da/install-rust-windows () {
     set -euxo pipefail
 
-    [[ -a ~/.config/zsh/rust-windows.zshrc ]] && return
+    [[ -a ~/.config/zsh/rust-windows.zshenv ]] && return
 
     da/install-rust
 
@@ -64,7 +69,9 @@ da/install-rust-windows () {
         # are _generally_ not interesting.
         echo 'export CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER=lld-link'
         echo 'export CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS="-Lnative=/home/dev/xwin/crt/lib/x86_64 -Lnative=/home/dev/xwin/sdk/lib/um/x86_64 -Lnative=/home/dev/xwin/sdk/lib/ucrt/x86_64"'
-    ) > ~/.config/zsh/rust-windows.zshrc
+    ) > ~/.config/zsh/rust-windows.zshenv
+
+    source ~/.config/zsh/rust-windows.zshenv
 }
 
 da/install-wasm-prereqs() {

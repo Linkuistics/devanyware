@@ -62,21 +62,23 @@ da/install-c-macos() {
     sudo apt-get update
     DEBIAN_FRONTEND='noninteractive' sudo apt-get install -y --no-install-recommends -o APT::Immediate-Configure=false libmpc-dev libmpfr-dev libz-dev
 
-    export OSXCROSS_SDK_VERSION=10.10
-    export OSXCROSS_PREFIX=x86_64-apple-darwin14
+    export OSXCROSS_SDK_VERSION=11.3
 
     pushd /home/dev
 
     git clone https://github.com/tpoechtrager/osxcross
     cd osxcross
-    wget -nc https://s3.dockerproject.org/darwin/v2/MacOSX${OSXCROSS_SDK_VERSION}.sdk.tar.xz -O tarballs/MacOSX${OSXCROSS_SDK_VERSION}.sdk.tar.xz
-    UNATTENDED=yes OSX_VERSION_MIN=10.10 PORTABLE=true ./build.sh
+    wget -nc https://github.com/phracker/MacOSX-SDKs/releases/download/${OSXCROSS_SDK_VERSION}/MacOSX${OSXCROSS_SDK_VERSION}.sdk.tar.xz -O tarballs/MacOSX${OSXCROSS_SDK_VERSION}.sdk.tar.xz
+    UNATTENDED=yes OSX_VERSION_MIN=${OSXCROSS_SDK_VERSION} PORTABLE=true ./build.sh
 
     (
         echo "export OSXCROSS_SDK_VERSION=${OSXCROSS_SDK_VERSION}"
-        echo "export OSXCROSS_PREFIX=${OSXCROSS_PREFIX}"
+        echo "export AARCH64_OSXCROSS_PREFIX=aarch64-apple-darwin20"
+        echo "export X86_64_OSXCROSS_PREFIX=x86_64-apple-darwin20"
         echo 'export path=(/home/dev/osxcross/target/bin $path)'
     ) > ~/.config/zsh/c-macos.zshenv
+
+    source ~/.config/zsh/c-macos.zshenv
 
     popd
 }
