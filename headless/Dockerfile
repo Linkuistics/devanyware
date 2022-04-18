@@ -51,7 +51,7 @@ RUN set -euxo pipefail ; \
        iproute2 procps lsb-release \
        gnupg2 apt-transport-https ca-certificates \
        openssh-server \
-       psmisc htop curl gawk file wget less patch jq sed xz-utils socat unzip vim ; \
+       psmisc htop curl gawk file wget less patch jq sed xz-utils socat unzip vim gettext-base ; \
     mkdir /var/run/sshd ; \
     echo AddressFamily inet >> /etc/ssh/sshd_config
 
@@ -83,6 +83,9 @@ USER dev
 
 RUN mkdir /home/dev/work
 WORKDIR /home/dev/work
+
+ENV HERMIT_VERSION=v0.18.3
+RUN curl -fsSL https://github.com/cashapp/hermit/releases/download/${HERMIT_VERSION}/install.sh | bash
 
 ENV ASDF_VERSION=0.9.0
 RUN set -euxo pipefail ; \

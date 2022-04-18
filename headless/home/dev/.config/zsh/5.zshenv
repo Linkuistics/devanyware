@@ -7,4 +7,4 @@ alias vi=vim
 
 ######## local binaries
 
-export path=($HOME/local/bin $HOME/.local/bin $path)
+export path=($HOME/bin $path)
