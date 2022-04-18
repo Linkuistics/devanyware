@@ -38,7 +38,7 @@ RUN set -euxo pipefail ; \
 # base image
 #####################################################
 
-FROM linkuistics/devanyware-headless:${VERSION_TAG}
+FROM linkuistics/devanyware-headless:latest
 
 COPY usr /usr
 COPY --chown=dev:dev home/dev /home/dev
