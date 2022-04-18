@@ -4,8 +4,6 @@
 
 FROM ubuntu:21.04
 
-ENV GLOBAL_CHECK_DATE=2022-03-18
-
 RUN set -eux ; \
     apt-get update ; \
     DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends -o APT::Immediate-Configure=false apt-utils locales
