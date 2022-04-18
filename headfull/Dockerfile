@@ -1,3 +1,5 @@
+ARG VERSION_TAG
+
 #####################################################
 # polybar staged image
 #####################################################
@@ -38,7 +40,7 @@ RUN set -euxo pipefail ; \
 # base image
 #####################################################
 
-FROM linkuistics/devanyware-headless:latest
+FROM linkuistics/devanyware-headless:$VERSION_TAG
 
 COPY usr /usr
 COPY --chown=dev:dev home/dev /home/dev

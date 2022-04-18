@@ -51,7 +51,7 @@ RUN set -euxo pipefail ; \
        iproute2 procps lsb-release \
        gnupg2 apt-transport-https ca-certificates \
        openssh-server \
-       psmisc htop curl gawk file wget less patch jq sed xz-utils socat unzip vim gettext-base ; \
+       psmisc htop curl gawk file wget less patch jq sed xz-utils socat unzip vim ; \
     mkdir /var/run/sshd ; \
     echo AddressFamily inet >> /etc/ssh/sshd_config
 

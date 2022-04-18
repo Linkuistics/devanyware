@@ -9,12 +9,10 @@ set -euxo pipefail
 for name in headless headfull ; do 
     pushd $name
     echo "$name build of $(date)" > ../$name.build.log
-    envsubst '$VERSION_TAG' < Dockerfile > Dockerfile.subst
     docker build \
+        --build-arg VERSION_TAG=${VERSION_TAG} \
         --tag linkuistics/devanyware-${name}:${VERSION_TAG} \
-        --file Dockerfile.subst \
         . \
     | tee -a ../$name.build.log
-    rm Dockerfile.subst
     popd
 done
