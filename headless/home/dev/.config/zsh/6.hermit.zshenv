@@ -1,0 +1,1 @@
+eval "$($HOME/bin/hermit shell-hooks --print --zsh)"
