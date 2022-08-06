@@ -2,7 +2,7 @@
 # base image
 #####################################################
 
-FROM ubuntu:21.04
+FROM ubuntu:22.04
 
 RUN set -eux ; \
     apt-get update ; \
@@ -46,10 +46,10 @@ CMD ["/usr/bin/zsh"]
 RUN set -euxo pipefail ; \
     apt-get update ; \
     DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends -o APT::Immediate-Configure=false \
-       iproute2 procps lsb-release \
-       gnupg2 apt-transport-https ca-certificates \
-       openssh-server \
-       psmisc htop curl gawk file wget less patch jq sed xz-utils socat unzip vim ; \
+    iproute2 procps lsb-release \
+    gnupg2 apt-transport-https ca-certificates \
+    openssh-server \
+    psmisc htop curl gawk file wget less patch jq sed xz-utils socat unzip vim ; \
     mkdir /var/run/sshd ; \
     echo AddressFamily inet >> /etc/ssh/sshd_config
 
@@ -64,12 +64,12 @@ RUN set -euxo pipefail ; \
 ENV DOCKER_VERSION=20.10.9
 RUN set -euxo pipefail ; \
     curl --location --silent https://download.docker.com/linux/static/stable/$(arch)/docker-${DOCKER_VERSION}.tgz \
-       | tar zx --strip-components=1 --directory=/usr/bin docker/docker --no-overwrite-dir
+    | tar zx --strip-components=1 --directory=/usr/bin docker/docker --no-overwrite-dir
 
 # https://github.com/docker/compose/releases
 RUN set -euxo pipefail ; \
     curl --location --silent https://github.com/docker/compose/releases/download/v2.3.4/docker-compose-linux-$(arch) \
-        > /usr/local/bin/docker-compose ; \
+    > /usr/local/bin/docker-compose ; \
     chmod +x /usr/local/bin/docker-compose
 
 
