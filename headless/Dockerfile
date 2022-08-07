@@ -67,8 +67,9 @@ RUN set -euxo pipefail ; \
     | tar zx --strip-components=1 --directory=/usr/bin docker/docker --no-overwrite-dir
 
 # https://github.com/docker/compose/releases
+ENV DOCKER_COMPOSE_VERSION=2.9.0
 RUN set -euxo pipefail ; \
-    curl --location --silent https://github.com/docker/compose/releases/download/v2.3.4/docker-compose-linux-$(arch) \
+    curl --location --silent https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-$(arch) \
     > /usr/local/bin/docker-compose ; \
     chmod +x /usr/local/bin/docker-compose
 
@@ -82,13 +83,22 @@ USER dev
 RUN mkdir /home/dev/work
 WORKDIR /home/dev/work
 
-ENV HERMIT_VERSION=v0.18.3
-RUN curl -fsSL https://github.com/cashapp/hermit/releases/download/${HERMIT_VERSION}/install.sh | bash
+# https://github.com/cashapp/hermit/releases/
+ENV HERMIT_VERSION=0.25.0
+RUN curl -fsSL https://github.com/cashapp/hermit/releases/download/v${HERMIT_VERSION}/install.sh | bash
 
-ENV ASDF_VERSION=0.9.0
+# https://github.com/asdf-vm/asdf/releases
+ENV ASDF_VERSION=0.10.2
 RUN set -euxo pipefail ; \
     git clone https://github.com/asdf-vm/asdf.git /home/dev/.asdf --branch v${ASDF_VERSION}
 
 # Separate run block to pick up previous block changes to the shell
 RUN set -euxo pipefail ; \
     asdf plugin add starship && asdf install starship latest && asdf global starship latest && echo 'eval "$(starship init zsh)"' > ~/.config/zsh/starship.zshrc
+
+
+#####################################################
+# vscode devcontainer support
+#####################################################
+
+RUN mkdir -p /home/dev/.vscode-server/extensions
