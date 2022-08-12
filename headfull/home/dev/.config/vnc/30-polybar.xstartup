@@ -1,1 +1,5 @@
-(sleep 2 ; $HOME/.config/polybar/launch.sh ) &
+(
+    sleep 2
+    export MONITOR=$(xrandr --query | grep " connected" | cut -d" " -f1)
+    polybar top &
+) &

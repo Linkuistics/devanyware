@@ -53,7 +53,7 @@ font-3 = DejaVu Sans:pixelsize=9;0
 font-4 = Font Awesome 5 Pro Solid:pixelsize=11;2
 font-5 = Font Awesome 5 Pro Regular:pixelsize=11;2
 
-modules-left = ewmh spacer app-terminal app-firefox spacer help
+modules-left = app-terminal
 modules-center = xwindow
 modules-right = memory cpu date exit
 fixed-center = true
@@ -71,20 +71,6 @@ content-margin = 1
 content-foreground = #ccc
 content = %{T5}%{T-}
 click-left = lxterminal &
-
-[module/app-firefox]
-type = custom/text
-content-margin = 1
-content-foreground = #ccc
-content = %{T5}%{T-}
-click-left = firefox &
-
-[module/help]
-type = custom/text
-content-margin = 1 
-content-foreground = #7f7
-content = %{T6}%{T-}
-click-left = firefox http://github.com/linkuistics/devanyware &
 
 [module/exit]
 type = custom/text
@@ -130,21 +116,3 @@ format-margin = 2
 type = internal/xwindow
 label = %title:0:160:...%
 format-foreground = ${colors.fgxwindow}
-
-[module/ewmh]
-type = internal/xworkspaces
-pin-workspaces = false
-enable-click = false
-enable-scroll = false
-
-label-active = " %name% "
-label-active-underline = #fba922
-
-label-occupied = " %name% "
-label-occupied-foreground = #ffaa00
-
-label-urgent = " %name% "
-label-urgent-underline = #9b0a20
-
-label-empty = " %name% "
-label-empty-foreground = #555555
