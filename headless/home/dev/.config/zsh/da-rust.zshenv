@@ -99,13 +99,3 @@ da/install-rust-wasm() {
 
     touch ~/.config/zsh/rust-wasm.zshenv
 }
-
-da/install-wasisdk-version() {
-    set -euxo pipefail
-
-    VERSION=$1
-
-    asdf plugin add wasi-sdk
-    asdf install wasi-sdk $VERSION
-    asdf local wasi-sdk $VERSION
-}

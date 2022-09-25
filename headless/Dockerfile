@@ -89,7 +89,10 @@ RUN curl -fsSL https://github.com/cashapp/hermit/releases/download/v${HERMIT_VER
 RUN hermit init
 
 RUN set -euxo pipefail ; \
-    curl -sS https://starship.rs/install.sh | sh && \
+    curl -sS https://starship.rs/install.sh > install-starship.sh && \
+    chmod +x install-starship.sh && \
+    sudo ./install-starship.sh --yes && \
+    rm install-starship.sh && \
     echo 'eval "$(starship init zsh)"' > ~/.config/zsh/starship.zshrc
 
 #####################################################
