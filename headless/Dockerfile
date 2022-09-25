@@ -86,7 +86,6 @@ WORKDIR /home/dev/work
 # https://github.com/cashapp/hermit/releases/
 ENV HERMIT_VERSION=0.28.0
 RUN curl -fsSL https://github.com/cashapp/hermit/releases/download/v${HERMIT_VERSION}/install.sh | bash
-RUN hermit init
 
 RUN set -euxo pipefail ; \
     curl -sS https://starship.rs/install.sh > install-starship.sh && \
