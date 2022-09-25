@@ -13,7 +13,7 @@ ENV LC_ALL=en_AU.UTF-8
 
 RUN set -eux ; \
     echo 'root:root' | chpasswd ; \
-    ln -fs /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime ; \
+    ln -fs /usr/share/zoneinfo/Australia/Melbourne /etc/localtime ; \
     apt-get update && DEBIAN_FRONTEND='noninteractive' apt-get install -y tzdata sudo ; \
     echo "Set disable_coredump false" >> /etc/sudo.conf
 
@@ -67,7 +67,7 @@ RUN set -euxo pipefail ; \
     | tar zx --strip-components=1 --directory=/usr/bin docker/docker --no-overwrite-dir
 
 # https://github.com/docker/compose/releases
-ENV DOCKER_COMPOSE_VERSION=2.9.0
+ENV DOCKER_COMPOSE_VERSION=2.11.1
 RUN set -euxo pipefail ; \
     curl --location --silent https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-$(arch) \
     > /usr/local/bin/docker-compose ; \
@@ -84,18 +84,13 @@ RUN mkdir /home/dev/work
 WORKDIR /home/dev/work
 
 # https://github.com/cashapp/hermit/releases/
-ENV HERMIT_VERSION=0.25.0
+ENV HERMIT_VERSION=0.28.0
 RUN curl -fsSL https://github.com/cashapp/hermit/releases/download/v${HERMIT_VERSION}/install.sh | bash
+RUN hermit init
 
-# https://github.com/asdf-vm/asdf/releases
-ENV ASDF_VERSION=0.10.2
 RUN set -euxo pipefail ; \
-    git clone https://github.com/asdf-vm/asdf.git /home/dev/.asdf --branch v${ASDF_VERSION}
-
-# Separate run block to pick up previous block changes to the shell
-RUN set -euxo pipefail ; \
-    asdf plugin add starship && asdf install starship latest && asdf global starship latest && echo 'eval "$(starship init zsh)"' > ~/.config/zsh/starship.zshrc
-
+    curl -sS https://starship.rs/install.sh | sh && \
+    echo 'eval "$(starship init zsh)"' > ~/.config/zsh/starship.zshrc
 
 #####################################################
 # vscode devcontainer support
