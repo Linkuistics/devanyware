@@ -1,3 +1,11 @@
 #!/usr/bin/env zsh
 
-sudo /usr/sbin/sshd -D
+# sudo /usr/sbin/sshd -D
+# RUN set -euxo pipefail ; \
+#     apt-get update ; \
+#     DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends -o APT::Immediate-Configure=false \
+#     openssh-server \
+#     mkdir /var/run/sshd ; \
+#     echo AddressFamily inet >> /etc/ssh/sshd_config
+
+while true ; do sleep 60 ; done
